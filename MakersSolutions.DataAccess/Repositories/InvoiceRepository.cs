@@ -16,5 +16,21 @@ namespace MakersSolutions.DataAccess.Repositories
         public InvoiceRepository(DataContext context) : base(context)
         {
         }
+
+        public override async Task<List<Invoice>> GetAsync()
+        {
+            var invoices = await _context.Invoices
+                .FromSqlRaw("EXEC SP_GetAllInvoices").ToListAsync();
+            
+            return invoices;
+        }
+
+        public override async Task<Invoice> GetByIdAsync(int id)
+        {
+            var invoice = await _context.Invoices
+                .FromSqlInterpolated($"EXEC SP_GetInvoice @ID={id}").ToListAsync();
+
+            return invoice.FirstOrDefault();
+        }
     }
 }
