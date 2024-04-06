@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MakersSolutions.Core.Entities.Common
 {
-    public abstract class EntidadBase
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
-        public bool Eliminada { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
