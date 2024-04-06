@@ -14,21 +14,21 @@ namespace MakersSolutions.Application.Services.Invoice
     {
         private readonly IMapper _mapper;
         private readonly IInvoiceRepository _invoiceRepository;
-        private readonly ICustomerRepository _clientRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public InvoiceService(IMapper mapper, IInvoiceRepository invoiceRepository, ICustomerRepository clientRepository)
+        public InvoiceService(IMapper mapper, IInvoiceRepository invoiceRepository, ICustomerRepository customerRepository)
         {
             _mapper = mapper;
             _invoiceRepository = invoiceRepository;
-            _clientRepository = clientRepository;
+            _customerRepository = customerRepository;
         }
         public async Task<int?> AddInvoice(InvoiceDto invoice)
         {
             try
             {
-                var client = await _clientRepository.GetByIdAsync(invoice.ClientId);
+                var customer = await _customerRepository.GetByIdAsync(invoice.CustomerId);
 
-                if (client is null)
+                if (customer is null)
                     return null;
 
                 var invoiceToCreate = _mapper.Map<Core.Entities.Invoice>(invoice);
@@ -102,10 +102,10 @@ namespace MakersSolutions.Application.Services.Invoice
         {
             try
             {
-                //Check if client exist
-                var client = await _clientRepository.GetByIdAsync(invoice.ClientId);
+                //Check if customer exist
+                var customer = await _customerRepository.GetByIdAsync(invoice.CustomerId);
 
-                if (client is null)
+                if (customer is null)
                     return null;
 
                 var invoiceToUpdate = await _invoiceRepository.GetByIdAsync(invoice.Id);
