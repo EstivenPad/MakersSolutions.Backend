@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MakersSolutions.Core.Entities
 {
-    public class Client : BaseEntity
+    public class Customer : BaseEntity
     {
         public string Name { get; set; } = string.Empty;
         public string Lastname { get; set; } = string.Empty;

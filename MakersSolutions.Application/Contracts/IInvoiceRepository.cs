@@ -9,6 +9,5 @@ namespace MakersSolutions.Application.Contracts
 {
     public interface IInvoiceRepository : IGenericRepository<Invoice>
     {
-
     }
 }

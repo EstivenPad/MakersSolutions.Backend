@@ -9,7 +9,7 @@ namespace MakersSolutions.DataAccess.DatabaseContext
         {
         }
 
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
     }
 }

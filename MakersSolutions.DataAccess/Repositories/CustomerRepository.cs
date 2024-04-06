@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace MakersSolutions.DataAccess.Repositories
 {
-    public class ClientRepository : GenericRepository<Client>, IClientRepository
+    public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
     {
-        public ClientRepository(DataContext context) : base(context)
+        public CustomerRepository(DataContext context) : base(context)
         {
             
         }

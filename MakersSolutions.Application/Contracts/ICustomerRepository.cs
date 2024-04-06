@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MakersSolutions.Application.Contracts
 {
-    public interface IClientRepository : IGenericRepository<Client>
+    public interface ICustomerRepository : IGenericRepository<Customer>
     {
     }
 }

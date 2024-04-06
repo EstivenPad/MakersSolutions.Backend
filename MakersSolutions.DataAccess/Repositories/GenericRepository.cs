@@ -19,10 +19,12 @@ namespace MakersSolutions.Application.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(T entity)
+        public async Task<int> CreateAsync(T entity)
         {
             await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
+            
+            return entity.Id;
         }
 
         public async Task DeleteAsync(T entity)
@@ -31,12 +33,12 @@ namespace MakersSolutions.Application.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAsync()
+        public virtual async Task<List<T>> GetAsync()
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
         }
