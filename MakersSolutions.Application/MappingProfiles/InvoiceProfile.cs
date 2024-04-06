@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace MakersSolutions.Application.MappingProfiles
 {
-    public class FacturaProfile : Profile
+    public class InvoiceProfile : Profile
     {
-        public FacturaProfile()
+        public InvoiceProfile()
         {
-            CreateMap<Factura, InvoiceDto>().ReverseMap();
+            CreateMap<Invoice, InvoiceDto>().ReverseMap();
         }
     }
 }

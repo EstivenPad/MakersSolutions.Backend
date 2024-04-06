@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace MakersSolutions.Application.MappingProfiles
 {
-    public class ClienteProfile : Profile
+    public class ClientProfile : Profile
     {
-        public ClienteProfile()
+        public ClientProfile()
         {
             CreateMap<Client, ClientDto>().ReverseMap();  
         }
