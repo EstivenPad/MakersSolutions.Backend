@@ -11,5 +11,6 @@ namespace MakersSolutions.DataAccess.DatabaseContext
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceStoredProcedure> InvoicesStoredProcedure { get; set; }
     }
 }

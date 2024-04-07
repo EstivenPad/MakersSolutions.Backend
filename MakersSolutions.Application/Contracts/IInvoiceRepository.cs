@@ -9,5 +9,6 @@ namespace MakersSolutions.Application.Contracts
 {
     public interface IInvoiceRepository : IGenericRepository<Invoice>
     {
+        Task<InvoiceStoredProcedure> GetByIdFromStoredProcedureAsync(int id);
     }
 }

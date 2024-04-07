@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MakersSolutions.Application.Services.Customer;
+using MakersSolutions.Application.Services.Invoice;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,9 @@ namespace MakersSolutions.Application
         public static IServiceCollection AddApplicationServicesRegistration(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
 
             return services;
         }

@@ -14,6 +14,7 @@ namespace MakersSolutions.Application.MappingProfiles
         public InvoiceProfile()
         {
             CreateMap<Invoice, InvoiceDto>().ReverseMap();
+            CreateMap<InvoiceStoredProcedure, InvoiceStoredProcedureDto>();
         }
     }
 }

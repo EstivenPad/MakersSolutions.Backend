@@ -9,11 +9,11 @@ namespace MakersSolutions.Application.Services.Customer
 {
     public interface ICustomerService
     {
-        Task<List<CustomerDto>?> GetAllCustomers();
+        Task<List<CustomerDto>> GetAllCustomers();
         Task<CustomerDto?> GetCustomer(int id);
-        Task<int?> AddCustomer(CustomerDto customer);
-        Task<int?> UpdateCustomer(CustomerDto customer);
-        Task<int?> RemoveCustomer(int id);
+        Task<int> AddCustomer(CustomerDto customer);
+        Task<int> UpdateCustomer(CustomerDto customer);
+        Task<int> RemoveCustomer(int id);
 
     }
 }

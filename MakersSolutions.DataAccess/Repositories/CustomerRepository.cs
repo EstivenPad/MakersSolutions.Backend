@@ -1,5 +1,4 @@
 ﻿using MakersSolutions.Application.Contracts;
-using MakersSolutions.Application.Repositories;
 using MakersSolutions.Core.Entities;
 using MakersSolutions.DataAccess.DatabaseContext;
 using System;

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MakersSolutions.Application.Contracts;
 using MakersSolutions.Application.DTOs;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,16 @@ namespace MakersSolutions.Application.Services.Customer
     {
         private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepository;
+        private readonly ILogger<CustomerService> _logger;
 
-        public CustomerService(IMapper mapper, ICustomerRepository customerRespository)
+        public CustomerService(IMapper mapper, ICustomerRepository customerRespository, ILogger<CustomerService> logger)
         {
             _mapper = mapper;
             _customerRepository = customerRespository;
+            _logger = logger;
         }
 
-        public async Task<int?> AddCustomer(CustomerDto customer)
+        public async Task<int> AddCustomer(CustomerDto customer)
         {
             try
             {
@@ -30,25 +33,26 @@ namespace MakersSolutions.Application.Services.Customer
 
                 return customerId;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                _logger.LogError($"Error in the AddCustomer method, {ex.Message}");
+                throw ex;
             }
         }
 
-        public async Task<List<CustomerDto>?> GetAllCustomers()
+        public async Task<List<CustomerDto>> GetAllCustomers()
         {
             try
             {
                 var customers = await _customerRepository.GetAsync();
-
                 var data = _mapper.Map<List<CustomerDto>>(customers);
 
                 return data;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                _logger.LogError($"Error in the GetAllCustomers method, {ex.Message}");
+                throw ex;
             }
         }   
 
@@ -65,39 +69,41 @@ namespace MakersSolutions.Application.Services.Customer
 
                 return data;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                _logger.LogError($"Error in the GetCustomer method, {ex.Message}");
+                throw ex;
             }
         }
 
-        public async Task<int?> RemoveCustomer(int id)
+        public async Task<int> RemoveCustomer(int id)
         {
             try
             {
                 var customer = await _customerRepository.GetByIdAsync(id);
 
                 if (customer is null)
-                    return null;
+                    return 0;
 
                 await _customerRepository.DeleteAsync(customer);
 
                 return id;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                _logger.LogError($"Error in the RemoveCustomer method, {ex.Message}");
+                throw ex;
             }
         }
 
-        public async Task<int?> UpdateCustomer(CustomerDto customer)
+        public async Task<int> UpdateCustomer(CustomerDto customer)
         {
             try
             {
                 var customerToUpdate = await _customerRepository.GetByIdAsync(customer.Id);
 
                 if (customerToUpdate is null)
-                    return null;
+                    return 0;
 
                 _mapper.Map(customer, customerToUpdate);
 
@@ -105,9 +111,10 @@ namespace MakersSolutions.Application.Services.Customer
 
                 return customer.Id;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                _logger.LogError($"Error in the UpdateCustomer method, {ex.Message}");
+                throw ex;
             }
         }
     }

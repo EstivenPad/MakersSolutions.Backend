@@ -9,10 +9,10 @@ namespace MakersSolutions.Application.Services.Invoice
 {
     public interface IInvoiceService
     {
-        Task<List<InvoiceDto>?> GetAllInvoices();
-        Task<InvoiceDto?> GetInvoice(int id);
-        Task<int?> AddInvoice(InvoiceDto invoice);
-        Task<int?> UpdateInvoice(InvoiceDto invoice);
-        Task<int?> RemoveInvoice(int id);
+        Task<List<InvoiceDto>> GetAllInvoices();
+        Task<InvoiceStoredProcedureDto?> GetInvoice(int id);
+        Task<int> AddInvoice(InvoiceDto invoice);
+        Task<int> UpdateInvoice(InvoiceDto invoice);
+        Task<int> RemoveInvoice(int id);
     }
 }

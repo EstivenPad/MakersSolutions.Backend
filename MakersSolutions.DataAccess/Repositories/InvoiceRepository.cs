@@ -1,5 +1,4 @@
 ﻿using MakersSolutions.Application.Contracts;
-using MakersSolutions.Application.Repositories;
 using MakersSolutions.Core.Entities;
 using MakersSolutions.DataAccess.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -25,10 +24,11 @@ namespace MakersSolutions.DataAccess.Repositories
             return invoices;
         }
 
-        public override async Task<Invoice> GetByIdAsync(int id)
+        public async Task<InvoiceStoredProcedure> GetByIdFromStoredProcedureAsync(int id)
         {
-            var invoice = await _context.Invoices
-                .FromSqlInterpolated($"EXEC SP_GetInvoice @ID={id}").ToListAsync();
+            var invoice = await _context.InvoicesStoredProcedure
+                .FromSqlInterpolated($"EXEC SP_GetInvoice {id}")
+                .ToListAsync();
 
             return invoice.FirstOrDefault();
         }

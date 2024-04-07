@@ -20,6 +20,7 @@ namespace MakersSolutions.DataAccess
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionString"));
             });
 
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
