@@ -24,14 +24,11 @@ namespace MakersSolutions.API.Controllers
             {
                 var response = await _customerService.GetAllCustomers();
 
-                if (!response.Any())
-                    return NotFound("There are not customers...");
-
                 return Ok(response);
             }
             catch (Exception)
             {
-                return BadRequest("Error server...");
+                return BadRequest("Server Error...");
             }
         }
 
@@ -43,7 +40,7 @@ namespace MakersSolutions.API.Controllers
                 var response = await _customerService.GetCustomer(id);
 
                 if (response is null)
-                    return NotFound($"There is not customer with Id ({id})...");
+                    return NotFound($"There is not a customer with Id ({id})...");
 
                 return Ok(response);
             }
@@ -77,7 +74,7 @@ namespace MakersSolutions.API.Controllers
                 var response = await _customerService.UpdateCustomer(customer);
 
                 if (response == 0)
-                    return NotFound($"There is not customer with Id ({customer.Id})...");
+                    return NotFound($"There is not a customer with Id ({customer.Id})...");
 
                 return Ok(response);
             }
@@ -95,7 +92,7 @@ namespace MakersSolutions.API.Controllers
                 var response = await _customerService.RemoveCustomer(id);
 
                 if (response == 0)
-                    return NotFound($"There is not customer with Id ({id})...");
+                    return NotFound($"There is not a customer with Id ({id})...");
 
                 return Ok(response);
             }

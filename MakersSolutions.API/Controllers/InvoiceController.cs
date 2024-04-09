@@ -24,14 +24,11 @@ namespace MakersSolutions.API.Controllers
             {
                 var response = await _invoiceService.GetAllInvoices();
 
-                if (!response.Any())
-                    return NotFound("There are not invoices...");
-
                 return Ok(response);
             }
             catch (Exception)
             {
-                return BadRequest("Error server...");
+                return BadRequest("Server Error...");
             }
         }
 
@@ -43,11 +40,11 @@ namespace MakersSolutions.API.Controllers
                 var response = await _invoiceService.GetInvoice(id);
 
                 if (response is null)
-                    return NotFound($"There is not invoice with Id ({id})...");
+                    return NotFound($"There is not an invoice with Id ({id})...");
 
                 return Ok(response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("Server Error...");
             }
@@ -59,6 +56,10 @@ namespace MakersSolutions.API.Controllers
             try
             {
                 var response = await _invoiceService.AddInvoice(invoice);
+
+                if (response == 0)
+                    return NotFound($"There is not a customer with Id ({invoice.CustomerId})...");
+
                 return CreatedAtAction(nameof(Post), response);
             }
             catch (Exception)
@@ -75,9 +76,9 @@ namespace MakersSolutions.API.Controllers
                 var response = await _invoiceService.UpdateInvoice(invoice);
 
                 if (response == 0)
-                    return NotFound($"There is not customer with Id ({invoice.CustomerId})...");
+                    return NotFound($"There is not a customer with Id ({invoice.CustomerId})...");
                 else if(response == -1)
-                    return NotFound($"There is not invoice with Id ({invoice.Id})...");
+                    return NotFound($"There is not an invoice with Id ({invoice.Id})...");
 
                 return Ok(response);
             }
@@ -95,7 +96,7 @@ namespace MakersSolutions.API.Controllers
                 var response = await _invoiceService.RemoveInvoice(id);
 
                 if (response == 0)
-                    return NotFound($"There is not invoice with Id ({id})...");
+                    return NotFound($"There is not an invoice with Id ({id})...");
 
                 return Ok(response);
             }
